@@ -36,12 +36,20 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        source: "build.tar"
+        source: "backend"
         target: "/var/lib/docker/volumes/react-storage/_data/"
-    - name: ls -a via ssh
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        source: "build.tar"
+        target: "/var/lib/docker/volumes/react-storage/_data/backend/app/views/"
+    - name: deploy
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: cd /var/lib/docker/volumes/react-storage/_data/ && tar -xf build.tar && mv build/* . 
+        command: cd /var/lib/docker/volumes/react-storage/_data/backend/app/views/ && tar -xf build.tar && mv build/* .
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
