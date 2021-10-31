@@ -32,10 +32,11 @@ jobs:
       run: mkdir build && cp -r frontend/build/* build/
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
+      run: cd build
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        source: "build/*"
+        source: "*"
         target: "/var/lib/docker/volumes/react-storage/_data/"
  
