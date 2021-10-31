@@ -49,7 +49,7 @@ jobs:
     - name: deploy
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: cd /var/lib/docker/volumes/react-storage/_data/backend/app/views/ && tar -xf build.tar && mv build/* .
+        command: cd /var/lib/docker/volumes/react-storage/_data/backend/app/views/ && tar -xf build.tar && cp -rfv build/* .
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
