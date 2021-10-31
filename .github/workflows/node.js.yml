@@ -33,4 +33,3 @@ jobs:
       run: npm run build --if-present
       working-directory: ./frontend
  
-      working-directory: ./frontend
