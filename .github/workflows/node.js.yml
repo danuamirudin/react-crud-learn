@@ -31,7 +31,9 @@ jobs:
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
       with:
-        key: ${{ secrets.SCP }}
-        source: "./frontend/build/*"
-        target: "/var/lib/docker/volumes/react-storage/_data"
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        source: "Dockerfile"
+        target: "/var/lib/docker/volumes/react-storage/_data/"
  
