@@ -18,18 +18,18 @@ jobs:
     - name: Checkout
       uses: actions/checkout@main
 
-#     - name: Set Node.js 16.x
-#       uses: actions/setup-node@main
-#       with:
-#         version: 16.x
-#     - name: instal ci
-#       run: npm ci
-#       working-directory: ./frontend
-#     - name: build
-#       run: npm run build --if-present
-#       working-directory: ./frontend
+    - name: Set Node.js 16.x
+      uses: actions/setup-node@main
+      with:
+        version: 16.x
+    - name: instal ci
+      run: npm ci
+      working-directory: ./frontend
+    - name: build
+      run: npm run build --if-present
+      working-directory: ./frontend
     - name: pre scp
-      run: cd frontend/build/ && ls
+      run: mkdir build && cp -r frontend/build/* build/
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
       with:
