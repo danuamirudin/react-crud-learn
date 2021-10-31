@@ -30,8 +30,6 @@ jobs:
       working-directory: ./frontend
     - name: pre scp
       run: mkdir build && cp -r frontend/build/* build/
-    - name: Deploy with rsync
-      run: 
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
       with:
