@@ -14,30 +14,29 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@main
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@main
 
-    - name: Set Node.js 16.x
-      uses: actions/setup-node@main
-      with:
-        version: 16.x
-    - name: instal ci
-      run: npm ci
-      working-directory: ./frontend
-    - name: build
-      run: npm run build --if-present
-      working-directory: ./frontend
+#     - name: Set Node.js 16.x
+#       uses: actions/setup-node@main
+#       with:
+#         version: 16.x
+#     - name: instal ci
+#       run: npm ci
+#       working-directory: ./frontend
+#     - name: build
+#       run: npm run build --if-present
+#       working-directory: ./frontend
       
-    - name: Install SSH key
-      uses: shimataro/ssh-key-action@v2
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
       with:
-        key: ${{ secrets.SSH_KEY }}
-        name: scp # optional
-        known_hosts: ${{ secrets.KNOWN_HOSTS }}
-        config: ${{ secrets.CONFIG }} # ssh_config; optional
-        if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
-    - name: rsync over ssh
-      run: rsync ./frontend/build/* root@34.101.187.18:/var/lib/docker/volumes/react-storage/_data/
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        source: "Dockerfile"
+        target: "/var/lib/docker/volumes/react-storage/_data"
     
  
