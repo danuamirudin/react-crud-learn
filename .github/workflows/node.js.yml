@@ -46,10 +46,18 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         source: "build.tar"
         target: "/var/lib/docker/volumes/react-storage/_data/backend/app/views/"
-    - name: deploy
+    - name:  deploy
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: cd /var/lib/docker/volumes/react-storage/_data/backend/app/views/ && tar -xf build.tar && cp -rfv build/* .
+        command: cd /var/lib/docker/volumes/react-storage/_data/backend/app/views/ && tar -xf build.tar && cp -rf build/* . && rm -rf build build.tar
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+ 
+    - name: finishing deploy
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: cd /var/lib/docker/volumes/react-storage/_data/ && mv backend/* .
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
