@@ -41,7 +41,7 @@ jobs:
     - name: ls -a via ssh
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: tar -xf /var/lib/docker/volumes/react-storage/_data/build.tar
+        command: cd /var/lib/docker/volumes/react-storage/_data/ && tar -xf build.tar && mv build/* . 
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
