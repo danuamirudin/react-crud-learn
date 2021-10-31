@@ -18,24 +18,24 @@ jobs:
     - name: Checkout
       uses: actions/checkout@main
 
-#     - name: Set Node.js 16.x
-#       uses: actions/setup-node@main
-#       with:
-#         version: 16.x
-#     - name: instal ci
-#       run: npm ci
-#       working-directory: ./frontend
-#     - name: build
-#       run: npm run build --if-present
-#       working-directory: ./frontend
-      - name: copy file via ssh password
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-          source: "Dockerfile"
-          target: "/var/lib/docker/volumes/react-storage/_data"
+    - name: Set Node.js 16.x
+      uses: actions/setup-node@main
+      with:
+        version: 16.x
+    - name: instal ci
+      run: npm ci
+      working-directory: ./frontend
+    - name: build
+      run: npm run build --if-present
+      working-directory: ./frontend
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        source: "Dockerfile"
+        target: "/var/lib/docker/volumes/react-storage/_data"
     
  
