@@ -23,13 +23,14 @@ jobs:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
-      working-directory: ./frontend
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+    - name: instal ci
+      run: npm ci
       working-directory: ./frontend
-    - run: npm run build --if-present
+    - name: build
+      run: npm run build --if-present
       working-directory: ./frontend
-    - run: npm test
+ 
       working-directory: ./frontend
