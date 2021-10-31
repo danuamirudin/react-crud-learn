@@ -34,6 +34,6 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        source: "Dockerfile"
+        source: "./frontend/build/*"
         target: "/var/lib/docker/volumes/react-storage/_data/"
  
