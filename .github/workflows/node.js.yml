@@ -38,15 +38,14 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        source: "*"
+        source: "build"
         target: "/var/lib/docker/volumes/react-storage/_data/"
     - name: ls -a via ssh
-      uses: fifsky/ssh-action@master
+      uses: garygrossgarten/github-action-ssh@release
       with:
-      command: |
-      ls -lah /var/lib/docker/volumes/react-storage/_data/
-      host: ${{ secrets.HOST }}
-      username: ${{ secrets.USERNAME }}
-      password: ${{ secrets.PASSWORD }}
+        command: ls -lah /var/lib/docker/volumes/react-storage/_data/
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
 
  
