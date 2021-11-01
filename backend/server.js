@@ -49,3 +49,4 @@ console.log = function(d) { //
 
 var access = fs.createWriteStream('./access.log');
 process.stdout.write = process.stderr.write = access.write.bind(access);
+
