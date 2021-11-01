@@ -25,11 +25,13 @@ jobs:
     - name: instal ci
       run: npm ci
       working-directory: ./frontend
+
     - name: build
       run: npm run build --if-present
       working-directory: ./frontend
     - name: pre scp
       run: mkdir build && cp -r frontend/build/* build/ && tar -cvf build.tar build/
+
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
       with:
@@ -38,6 +40,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         source: "backend"
         target: "/var/lib/docker/volumes/test/_data/"
+
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
       with:
@@ -46,6 +49,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         source: "build.tar"
         target: "/var/lib/docker/volumes/test/_data/backend/app/views/"
+
     - name:  deploy
       uses: garygrossgarten/github-action-ssh@release
       with:
@@ -65,7 +69,7 @@ jobs:
     - name: restart container
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command:  docker restart nero
+        command:  docker-compose restart
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
