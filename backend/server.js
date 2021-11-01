@@ -12,7 +12,7 @@ const app = express();
 app.use(express.static(path));
 
 var corsOptions = {
-  origin: "http://10.184.0.28:8081"
+  origin: "http://10.184.0.26:8081"
 };
 
 app.use(cors(corsOptions));
@@ -24,12 +24,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
+// NON-Development Purpose
+ db.sequelize.sync();
 
-// db.sequelize.sync();
-// // drop the table if it already exists
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
+// Development Purpose
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
 
 app.get('/', function (req,res) {
   res.sendFile(path + "index.html");
