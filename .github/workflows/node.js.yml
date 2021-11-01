@@ -22,6 +22,15 @@ jobs:
       uses: actions/setup-node@main
       with:
         version: 16.x
+
+    - name: install be package
+      run: npm i
+      working-directory: ./backend
+
+    - name: install fe package
+      run: npm i
+      working-directory: ./frontend
+      
     - name: instal ci
       run: npm ci
       working-directory: ./frontend
