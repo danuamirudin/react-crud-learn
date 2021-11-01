@@ -24,8 +24,9 @@ jobs:
         version: 16.x
 
     - name: install be package
-      run: npm ci
       working-directory: ./backend
+      run: npm ci
+      
 
     - name: install fe package
       run: npm ci
