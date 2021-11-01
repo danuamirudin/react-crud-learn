@@ -172,8 +172,8 @@ export default class TutorialsList extends Component {
             </div>
           ) : (
             <div>
-              <br />
-              <p>Klik Beranda</p>
+              {/* <br />
+              <p>Klik Beranda</p> */}
             </div>
           )}
         </div>
