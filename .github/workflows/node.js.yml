@@ -29,7 +29,7 @@ jobs:
     - name: build
       run: npm run build --if-present
       working-directory: ./frontend
-      
+
     - name: pre scp
       run: mkdir build && cp -r frontend/build/* build/ && tar -cvf build.tar build/
 
@@ -70,7 +70,7 @@ jobs:
     - name: restart container
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command:  docker-compose restart
+        command: cd /home/owel/dev/react-crud-learn && docker-compose restart
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
