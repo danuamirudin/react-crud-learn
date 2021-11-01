@@ -12,7 +12,7 @@ const app = express();
 app.use(express.static(path));
 
 var corsOptions = {
-  origin: "http://10.184.0.26:8081"
+  origin: "http://10.184.0.26:8081" //change this based on ENV IP
 };
 
 app.use(cors(corsOptions));

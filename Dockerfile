@@ -1,5 +1,6 @@
 FROM node:lts
 LABEL maintener="DANU AMIRUDIN"
+
 RUN mkdir /root/backend
 WORKDIR /root/backend/
 COPY backend/ /root/backend/
