@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
   pull_request:
-    branches: [ main ]
+    branches: [ dev ]
 
 jobs:
   build:
@@ -36,7 +36,7 @@ jobs:
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
       with:
-        host: ${{ secrets.HOST }}
+        host: ${{ secrets.HOSTDEV }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         source: "backend"
@@ -45,7 +45,7 @@ jobs:
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
       with:
-        host: ${{ secrets.HOST }}
+        host: ${{ secrets.HOSTDEV }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         source: "build.tar"
@@ -55,7 +55,7 @@ jobs:
       uses: garygrossgarten/github-action-ssh@release
       with:
         command: cd /var/lib/docker/volumes/react-crud-learn_react-storage/_data/backend/app/views/ && tar -xf build.tar && cp -rf build/* . && rm -rf build build.tar
-        host: ${{ secrets.HOST }}
+        host: ${{ secrets.HOSTDEV }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
  
@@ -63,7 +63,7 @@ jobs:
       uses: garygrossgarten/github-action-ssh@release
       with:
         command: cd /var/lib/docker/volumes/react-crud-learn_react-storage/_data/ && cp -rf backend/* . && rm -rf backend
-        host: ${{ secrets.HOST }}
+        host: ${{ secrets.HOSTDEV }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
 
@@ -71,7 +71,7 @@ jobs:
       uses: garygrossgarten/github-action-ssh@release
       with:
         command: cd /home/owel/dev/react-crud-learn && docker-compose restart
-        host: ${{ secrets.HOST }}
+        host: ${{ secrets.HOSTDEV }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
 
