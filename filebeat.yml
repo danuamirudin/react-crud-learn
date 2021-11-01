@@ -6,4 +6,4 @@ filebeat.inputs:
 
 output:
   logstash:
-        hosts: ["10.184.0.27:5044"]
+        hosts: ["10.184.0.26:5044"]

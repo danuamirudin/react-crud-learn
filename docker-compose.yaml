@@ -1,8 +1,8 @@
 version: "3.2"
 
 services:
-  nero:
-    image: nero:2
+  saber:
+    image: saber:1
     ports:
       - "8080:8080"
       - "5044:5044"
