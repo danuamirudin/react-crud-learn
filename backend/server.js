@@ -1,3 +1,6 @@
+const fs = require("fs")
+const util = require('util');
+const log_stdout = process.stdout;
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -39,3 +42,10 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+console.log = function(d) { //
+  log_stdout.write(util.format(d) + '\n');
+};
+
+var access = fs.createWriteStream('./access.log');
+process.stdout.write = process.stderr.write = access.write.bind(access);

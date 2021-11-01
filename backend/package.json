@@ -20,8 +20,11 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dir": "^0.1.2",
     "express": "^4.17.1",
     "mysql2": "^2.0.2",
+    "pipe": "^1.1.0",
+    "proc": "^0.2.2",
     "sequelize": "^5.21.2"
   }
 }
