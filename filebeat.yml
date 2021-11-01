@@ -1,0 +1,9 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - "/root/backend/access.log"
+
+output:
+  logstash:
+        hosts: ["10.184.0.27:5044"]

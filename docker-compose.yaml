@@ -1,0 +1,15 @@
+version: "3.2"
+
+services:
+  nero:
+    image: nero:2
+    ports:
+      - "8080:8080"
+      - "5044:5044"
+    volumes:
+      - type: volume
+        source: react-storage
+        target: /root/backend/
+
+volumes:
+  react-storage:
