@@ -62,4 +62,13 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
 
+    - name: restart container
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command:  docker restart nero
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+
+
  
