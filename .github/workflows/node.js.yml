@@ -70,7 +70,7 @@ jobs:
     - name: restart container
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: cd /home/owel/dev/react-crud-learn && docker-compose restart
+        command: cd /home/owel/react-crud-learn && docker-compose restart
         host: ${{ secrets.HOSTSTAGING }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
