@@ -1,0 +1,101 @@
+#Persistence Volume Claim
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: test-pv-claim
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 30Gi
+
+# Deployment COnfig
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: react
+  template:
+    metadata:
+      labels:
+        app: react
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: react
+          image: danuamirudin/react-crud-learn:latest
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "500m"
+            requests:
+              memory: "500Mi"
+              cpu: "250m"
+          ports:
+            - name: httport
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: "/#/tutorials"
+              port: 8080
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: "/#/tutorials"
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+      #     volumeMounts:
+      #       - name: react-data
+      #         mountPath: /root/backend
+      # volumes:
+      #   - name: react-data
+      #     persistentVolumeClaim:
+      #       claimName: test-pv-claim
+
+# Service Config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-service
+spec:
+  selector:
+    app: react
+  type: NodePort
+  ports:
+    - name: httport
+      port: 8080
+      targetPort: 8080
+      nodePort: 32000
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: react-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: react-service
+            port:
+              number: 8080

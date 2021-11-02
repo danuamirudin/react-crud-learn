@@ -3,6 +3,7 @@ LABEL maintener="DANU AMIRUDIN"
 RUN mkdir /root/backend
 WORKDIR /root/backend/
 COPY backend/ /root/backend/
+RUN npm i
 
 
 #Install tools
@@ -14,3 +15,4 @@ RUN chmod go-w /etc/filebeat/filebeat.yml
 COPY entrypoint.sh /root/backend/entrypoint.sh
 RUN chmod +x /root/backend/entrypoint.sh
 ENTRYPOINT ["/bin/bash","-c","./entrypoint.sh"]
+#CMD ["node", "server.js"]
